@@ -1,42 +1,52 @@
 // TODO:
   // Add radio buttons for the different selectable Arrays instead of using prompts.  
   // Add a prompt to remind the user that they need to pick SOMETHING if none of the arrays are selected
+  var addLowercase;
+  var addUppercase;
+  var addNumbers;
+  var addSymbols;
+  var checkboxElems = document.querySelectorAll('input[type="checkbox"]');
+  for (var i = 0; i <checkboxElems.length; i++){
+    checkboxElems[i].addEventListener('change', toggleValue);
+  }
+  
+//Change boolean values whenever checkboxes are switched
+function toggleValue(e){
+  if(e.target.id === 'lowercase'){
+    addLowercase = e.target.checked;
+  }
+  if(e.target.id === 'uppercase'){
+    addUppercase = e.target.checked;
+  }
+  if(e.target.id === 'numbers'){
+    addNumbers = e.target.checked;
+  }
+  if(e.target.id === 'symbols'){
+    addSymbols = e.target.checked;
+  }}
+
 function generatePassword() {
+  //Conditionals to check if options have been selected
+  if ((!addLowercase) && (!addUppercase) && (!addNumbers) && (!addSymbols)){
+    return alert('Please have at least one password option selected');
+  }
+  //Conditionals to check password length and data type
+  var passwordLength = Number(prompt("How many characters would you like in your password?"));
+  console.log(typeof passwordLength);
+  console.log(passwordLength);
+  if ((passwordLength < 8) || (passwordLength > 128)){
+    return alert('Password length must be at least 8 and no more than 128 characters');
+  }
+  if (isNaN(passwordLength)){
+    return alert('Please type in a number');
+  }
+
   var lowercaseLets = "abcdefghijklmnopqrstuvwxyz".split("");
   var uppercaseLets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   var numChars = "0123456789".split("");
   var symbolsChars = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~".split("");
-
   var password = "";
   var combinedArrays = [];
-
-  var passwordLength = Number(
-    prompt("How many characters would you like in your password?")
-  );
-  console.log(typeof passwordLength);
-  if (typeof passwordLength !== "number") {
-    alert("You must type a number");
-    //Maybe a better way to repeat?
-    passwordLength = Number(
-      prompt("How many characters would you like in your password?")
-    );
-  }
-  if (passwordLength < 8 && passwordLength > 128) {
-    alert("Your password must be at least 8 and no more than 128 characters");
-    passwordLength = Number(
-      prompt("How many characters would you like in your password?")
-    );
-  }
-
-  //Prompt for user inputs (Make this radio selectors on the screen because prompts are annoying)
-  var addLowercase = confirm("Do you want to include lowercase letters?");
-  console.log(addLowercase);
-  var addUppercase = confirm("Do you want to include uppercase letters?");
-  console.log(addUppercase);
-  var addNumbers = confirm("Do you want to include numbers?");
-  console.log(addNumbers);
-  var addSymbols = confirm("Do you want to include symbols?");
-  console.log(addSymbols);
 
   //Add the selected arrays to a combined pool of arrays
   if (addLowercase) {
@@ -103,6 +113,10 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
+  //Prevents "undefined" from being displayed when the generatePassword function doesn't complete
+  if (typeof password === 'undefined'){
+    return;
+  }
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
