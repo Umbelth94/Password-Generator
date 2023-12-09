@@ -54,6 +54,11 @@ header {
   min-height: 100px;
 }
 
+.card-body h3{
+  text-align:center;
+  text-decoration:underline;
+}
+
 .card-footer {
   text-align: center;
 }
@@ -64,6 +69,13 @@ header {
   width: 100%;
   background: #e7e9eb;
   height: 2px;
+}
+
+.password-options{
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  padding:1rem;
 }
 
 .card-footer::after {
