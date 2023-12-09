@@ -1,14 +1,14 @@
-// TODO:
-  // Add radio buttons for the different selectable Arrays instead of using prompts.  
-  // Add a prompt to remind the user that they need to pick SOMETHING if none of the arrays are selected
-  var addLowercase;
-  var addUppercase;
-  var addNumbers;
-  var addSymbols;
-  var checkboxElems = document.querySelectorAll('input[type="checkbox"]');
-  for (var i = 0; i <checkboxElems.length; i++){
-    checkboxElems[i].addEventListener('change', toggleValue);
-  }
+//Create some empty variables to become booleans based on the checkbox listeners
+var addLowercase;
+var addUppercase;
+var addNumbers;
+var addSymbols;
+
+//Give all checkboxes event listeners
+var checkboxElems = document.querySelectorAll('input[type="checkbox"]');
+for (var i = 0; i <checkboxElems.length; i++){
+  checkboxElems[i].addEventListener('change', toggleValue);
+}
   
 //Change boolean values whenever checkboxes are switched
 function toggleValue(e){
