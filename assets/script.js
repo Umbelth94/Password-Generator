@@ -9,7 +9,7 @@ var checkboxElems = document.querySelectorAll('input[type="checkbox"]');
 for (var i = 0; i <checkboxElems.length; i++){
   checkboxElems[i].addEventListener('change', toggleValue);
 }
-  
+
 //Change boolean values whenever checkboxes are switched
 function toggleValue(e){
   if(e.target.id === 'lowercase'){
@@ -23,9 +23,22 @@ function toggleValue(e){
   }
   if(e.target.id === 'symbols'){
     addSymbols = e.target.checked;
-  }}
+  }
+}
+
+  //Try to create the toggleValue function in a seperate function
+  function ifToggleValue(e, string){
+
+  }
+  var lowercaseLets = "abcdefghijklmnopqrstuvwxyz".split("");
+  var uppercaseLets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  var numChars = "0123456789".split("");
+  var symbolsChars = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~".split("");
+  // var password = "";
+  var combinedArrays = [];
 
 function generatePassword() {
+  var password = "";
   //Conditionals to check if options have been selected
   if ((!addLowercase) && (!addUppercase) && (!addNumbers) && (!addSymbols)){
     return alert('Please have at least one password option selected');
@@ -41,38 +54,45 @@ function generatePassword() {
     return alert('Please type in a number');
   }
 
-  var lowercaseLets = "abcdefghijklmnopqrstuvwxyz".split("");
-  var uppercaseLets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  var numChars = "0123456789".split("");
-  var symbolsChars = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~".split("");
-  var password = "";
-  var combinedArrays = [];
 
   //Add the selected arrays to a combined pool of arrays
-  if (addLowercase) {
-    combinedArrays = combinedArrays.concat(lowercaseLets);
-    passwordLength -= 1; //Subtract password length by 1 because we're adding an element to the password variable before the loop starts
-    console.log("New password length: " + passwordLength);
-    pullRandomIndex(lowercaseLets); //Pull one index element out to guarantee that this array gets used in the password
+  function addSelectedArrays(typeSelected, arrayName){
+    if (typeSelected){
+      combinedArrays = combinedArrays.concat(arrayName);
+      passwordLength -= 1;
+      console.log ('New password length: ' + passwordLength);
+      pullRandomIndex(arrayName);
+    }
   }
-  if (addUppercase) {
-    combinedArrays = combinedArrays.concat(uppercaseLets);
-    passwordLength -= 1;
-    console.log("New password length: " + passwordLength);
-    pullRandomIndex(uppercaseLets);
-  }
-  if (addNumbers) {
-    combinedArrays = combinedArrays.concat(numChars);
-    passwordLength -= 1;
-    console.log("New password length: " + passwordLength);
-    pullRandomIndex(numChars);
-  }
-  if (addSymbols) {
-    combinedArrays = combinedArrays.concat(symbolsChars);
-    passwordLength -= 1;
-    console.log("New password length: " + passwordLength);
-    pullRandomIndex(symbolsChars);
-  }
+
+  addSelectedArrays(addLowercase, lowercaseLets);
+  addSelectedArrays(addUppercase, uppercaseLets);
+  addSelectedArrays(addNumbers, numChars);
+  addSelectedArrays(addSymbols, symbolsChars);
+  // if (addLowercase) {
+  //   combinedArrays = combinedArrays.concat(lowercaseLets);
+  //   passwordLength -= 1; //Subtract password length by 1 because we're adding an element to the password variable before the loop starts
+  //   console.log("New password length: " + passwordLength);
+  //   pullRandomIndex(lowercaseLets); //Pull one index element out to guarantee that this array gets used in the password
+  // }
+  // if (addUppercase) {
+  //   combinedArrays = combinedArrays.concat(uppercaseLets);
+  //   passwordLength -= 1;
+  //   console.log("New password length: " + passwordLength);
+  //   pullRandomIndex(uppercaseLets);
+  // }
+  // if (addNumbers) {
+  //   combinedArrays = combinedArrays.concat(numChars);
+  //   passwordLength -= 1;
+  //   console.log("New password length: " + passwordLength);
+  //   pullRandomIndex(numChars);
+  // }
+  // if (addSymbols) {
+  //   combinedArrays = combinedArrays.concat(symbolsChars);
+  //   passwordLength -= 1;
+  //   console.log("New password length: " + passwordLength);
+  //   pullRandomIndex(symbolsChars);
+  // }
 
   function pullRandomIndex(array) {
     var randomIndex = Math.floor(Math.random() * array.length);
