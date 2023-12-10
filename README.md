@@ -1,6 +1,7 @@
 # Password Generator
 
 ## Description
+[Live Link] (https://umbelth94.github.io/Password-Generator/)
 
 A simple password generator that prompts the user to enter the desired password length, with some checkboxes that allow them to choose which types of characters they want included in the password.  The user is guaranteed to get at least one of each selected type, and the password will be randomly generated every time the button is pressed.  
 
