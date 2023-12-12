@@ -14,15 +14,19 @@ for (var i = 0; i <checkboxElems.length; i++){
 function toggleValue(e){
   if(e.target.id === 'lowercase'){
     addLowercase = e.target.checked;
+    console.log(e.target.checked);
   }
   if(e.target.id === 'uppercase'){
     addUppercase = e.target.checked;
+    console.log(e.target.checked);
   }
   if(e.target.id === 'numbers'){
     addNumbers = e.target.checked;
+    console.log(e.target.checked);
   }
   if(e.target.id === 'symbols'){
     addSymbols = e.target.checked;
+    console.log(e.target.checked);
   }
 }
 
@@ -102,6 +106,7 @@ function generatePassword() {
   console.log("original password " + password);
   password = password.shuffle();
   console.log("Shuffled password is now " + password);
+  combinedArrays = []; //Resets combinedArrays so that unchecking options deletes the data
   return password;
 }
 
